@@ -66,7 +66,7 @@ public class Employee {
 		return studentname;
 	}
 
-	public void setStudent_name(String studentname) {
+	public void setStudentname(String studentname) {
 		this.studentname = studentname;
 	}
 
