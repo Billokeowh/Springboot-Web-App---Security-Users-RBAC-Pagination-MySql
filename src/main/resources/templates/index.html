@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Management System</title>
+<title>Student Lesson Management System</title>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -20,26 +20,85 @@
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
+
 					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
-							Employee First Name</a>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+							Lesson ID</a>
 					</th>
+
 					<th>
-					<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
-							Employee Last Name</a>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentid&sortDir=' + ${reverseSortDir}}">
+							Student ID</a>
 					</th>
+
+
 					<th>
-					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
-							Employee Email</a>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentname&sortDir=' + ${reverseSortDir}}">
+							Student Name</a>
 					</th>
+
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">
+							Date</a>
+					</th>
+
+
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">
+							Location</a>
+					</th>
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=positivepoints&sortDir=' + ${reverseSortDir}}">
+							Positive Points</a>
+					</th>
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=negativepoints&sortDir=' + ${reverseSortDir}}">
+							Negative Points</a>
+					</th>
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentnotes&sortDir=' + ${reverseSortDir}}">
+							Student Notes</a>
+					</th>
+
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorid&sortDir=' + ${reverseSortDir}}">
+							Instructor ID</a>
+					</th>
+
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorname&sortDir=' + ${reverseSortDir}}">
+							Instructor Name</a>
+					</th>
+
+
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructornotes&sortDir=' + ${reverseSortDir}}">
+							Instructor Notes</a>
+					</th>
+
+
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="employee : ${listEmployees}">
-					<td th:text="${employee.firstName}"></td>
-					<td th:text="${employee.lastName}"></td>
-					<td th:text="${employee.email}"></td>
+					<td th:text="${employee.id}"></td>
+					<td th:text="${employee.studentid}"></td>
+					<td th:text="${employee.studentname}"></td>
+					<td th:text="${employee.date}"></td>
+					<td th:text="${employee.location}"></td>
+					<td th:text="${employee.positivepoints}"></td>
+					<td th:text="${employee.negativepoints}"></td>
+					<td th:text="${employee.studentnotes}"></td>
+					<td th:text="${employee.instructorid}"></td>
+					<td th:text="${employee.instructorname}"></td>
+					<td th:text="${employee.instructornotes}"></td>
 					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
 					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 					</td>

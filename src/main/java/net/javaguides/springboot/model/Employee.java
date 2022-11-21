@@ -8,43 +8,146 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "employees")
+@Table(name = "drivertraininglessons")
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	private long id;
 	
-	@Column(name = "first_name")
-	private String firstName;
-	
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Column(name = "email")
-	private String email;
+	@Column(name = "studentname")
+	private String studentname;
+
+	@Column(name = "date")
+	private String date;
+
+	@Column(name = "studentid")
+	private String studentid;
+
+	public String getInstructorid() {
+		return instructorid;
+	}
+
+	public void setInstructorid(String instructorid) {
+		this.instructorid = instructorid;
+	}
+
+	@Column(name = "instructorid")
+	private String instructorid;
+
+
+	@Column(name = "instructorname")
+	private String instructorname;
+
+	@Column(name = "location")
+	private String location;
+
+	@Column(name = "positivepoints")
+	private String positivepoints;
+
+	@Column(name = "negativepoints")
+	private String negativepoints;
+
+	@Column(name = "studentnotes")
+	private String studentnotes;
+
+	@Column(name = "instructornotes")
+	private String instructornotes;
+
 	public long getId() {
 		return id;
 	}
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getFirstName() {
-		return firstName;
+
+	public String getStudentname() {
+		return studentname;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public void setStudent_name(String studentname) {
+		this.studentname = studentname;
 	}
-	public String getLastName() {
-		return lastName;
+
+	public String getDate() {
+		return date;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+	public void setDate(String date) {
+		this.date = date;
 	}
-	public String getEmail() {
-		return email;
+
+	public String getStudentid() {
+		return studentid;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setStudentid(String studentid) {
+		this.studentid = studentid;
+	}
+
+	public String getInstructorname() {
+		return instructorname;
+	}
+
+	public void setInstructorname(String instructorname) {
+		this.instructorname = instructorname;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getPositivepoints() {
+		return positivepoints;
+	}
+
+	public void setPositivepoints(String positivepoints) {
+		this.positivepoints = positivepoints;
+	}
+
+	public String getNegativepoints() {
+		return negativepoints;
+	}
+
+	public void setNegativepoints(String negativepoints) {
+		this.negativepoints = negativepoints;
+	}
+
+	public String getStudentnotes() {
+		return studentnotes;
+	}
+
+	public void setStudentnotes(String studentnotes) {
+		this.studentnotes = studentnotes;
+	}
+
+	public String getInstructornotes() {
+		return instructornotes;
+	}
+
+	public void setInstructornotes(String instructornotes) {
+		this.instructornotes = instructornotes;
 	}
 }
+//	id
+//student_name
+//	email
+// date
+// studentid
+// instructornotes
+// location
+// positive
+// negative
+// StudentNotes
+// InstructorNotes
+
+
+
+
+
+
