@@ -34,6 +34,8 @@ public class EmployeeController {
 		model.addAttribute("employee", employee);
 		return "new_employee";
 	}
+
+
 	
 	@PostMapping("/saveEmployee")
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
@@ -67,7 +69,7 @@ public class EmployeeController {
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model) {
-		int pageSize = 5;
+		int pageSize = 50;
 		
 		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
 		List<Employee> listEmployees = page.getContent();
