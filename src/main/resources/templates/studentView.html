@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Student Lesson Management System</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+
+</head>
+<body  onload = JustDisplayOneStudent()>
+
+
+<div class="table">
+  <h1>Student View - Showing just lessons</h1>
+    <a th:href = "@{/}" class="btn btn-primary btn-sm mb-3"> Home </a>
+  <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add new lesson </a>
+  <input type="text" id="myInput" onkeyup="NameSearchFunction()" placeholder="Search for entry by Name" title="Type in a name">
+
+
+  <table id = "lessonTable" border="2" class = "table">
+    <thead>
+    <tr>
+
+      <th>
+        <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+          Lesson ID</a>
+      </th>
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentid&sortDir=' + ${reverseSortDir}}">
+                          Student ID</a>
+                  </th>
+
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentname&sortDir=' + ${reverseSortDir}}">
+                          Student Name</a>
+                  </th>
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">
+                          Date</a>
+                  </th>
+
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">
+                          Location</a>
+                  </th>
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=positivepoints&sortDir=' + ${reverseSortDir}}">
+                          Positive Points</a>
+                  </th>
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=negativepoints&sortDir=' + ${reverseSortDir}}">
+                          Negative Points</a>
+                  </th>
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentnotes&sortDir=' + ${reverseSortDir}}">
+                          Student Notes</a>
+                  </th>
+
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorid&sortDir=' + ${reverseSortDir}}">
+                          Instructor ID</a>
+                  </th>
+
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorname&sortDir=' + ${reverseSortDir}}">
+                          Instructor Name</a>
+                  </th>
+
+
+                  <th>
+                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructornotes&sortDir=' + ${reverseSortDir}}">
+                          Instructor Notes</a>
+                  </th>
+
+
+      <th> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="employee : ${listEmployees}">
+      <td th:text="${employee.id}"></td>
+                  <td th:text="${employee.studentid}"></td>
+                  <td th:text="${employee.studentname}"></td>
+                  <td th:text="${employee.date}"></td>
+                  <td th:text="${employee.location}"></td>
+                  <td th:text="${employee.positivepoints}"></td>
+                  <td th:text="${employee.negativepoints}"></td>
+                  <td th:text="${employee.studentnotes}"></td>
+                  <td th:text="${employee.instructorid}"></td>
+                  <td th:text="${employee.instructorname}"></td>
+                  <td th:text="${employee.instructornotes}"></td>
+      <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update lesson</a>
+        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete lesson</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div th:if = "${totalPages > 1}">
+    <div class = "row col-sm-10">
+      <div class = "col-sm-1">
+        Total Rows: [[${totalItems}]]
+      </div>
+      <div class = "col-sm-10">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+      </div>
+      <div class = "col-sm-1">
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function NameSearchFunction() {
+    let input, filter, table, tr, td, i, txtValue;
+
+    //Initilising all variables
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("lessonTable");
+    tr = table.getElementsByTagName("tr");
+    console.log(filter)
+
+
+
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        console.log(txtValue);
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+
+  function JustDisplayOneStudent() {
+    console.log("Running Search")
+      alert("Displaying Student Bobbys details");
+    input = "bobby";
+    filter = input.toUpperCase();
+    table = document.getElementById("lessonTable");
+    tr = table.getElementsByTagName("tr");
+    console.log(filter)
+
+    console.log("At For loop")
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        console.log(txtValue);
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+
+  }
+
+
+
+
+
+  // function LessonIDSearchFunction() {
+  // 	let input, filter, table, tr, td, i, txtValue;
+  //
+  // 	//Initilising all variables
+  // 	input = document.getElementById("myInput");
+  // 	filter = input.value.toUpperCase();
+  // 	table = document.getElementById("lessonTable");
+  // 	tr = table.getElementsByTagName("tr");
+  // 	console.log("Searching for ")
+  //
+  //
+  //
+  //
+  // 	for (i = 0; i < tr.length; i++) {
+  // 		td = tr[i].getElementsByTagName("td")[0]; //Refers to the column that is to be searched - in this case column 3
+  // 		if (td) {
+  // 			txtValue = td.textContent || td.innerText;
+  // 			console.log(txtValue);
+  // 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+  // 				tr[i].style.display = "";
+  // 			} else {
+  // 				tr[i].style.display = "none";
+  // 			}
+  // 		}
+  // 	}
+  // }
+
+
+</script>
+
+
+
+</body>
+</html>

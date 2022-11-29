@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden; /* Hide scrollbars */
+  }
+
+  /*Hero Image CSS*/
+  .hero-image {
+    background-image: url("https://www.moneyshake.com/shaking-news/wp-content/uploads/2019/11/Driving-Test-904x600.jpg");
+    background-color: #cccccc;
+    height: 1340px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+
+  .hero-text {
+    text-align: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  }
+
+  /*END OF HERO IMAGE CSS*/
+
+  /*HEADER CSS*/
+
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+
+  .active {
+    background-color: #04AA6D;
+  }
+
+
+  /*END OF HEADER CSS*/
+
+
+
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+<div class="NavBar">
+<ul>
+  <li><a href="default.asp">Home</a></li>
+  <li><a href="news.asp">News</a></li>
+  <li><a href="contact.asp">Contact</a></li>
+  <li><a href="about.asp">About</a></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+<div class="hero-image">
+  <div class="hero-text">
+    <h1 style="font-size:50px" >Learner Driving Web Application</h1>
+    <h3>Welcome to your one-stop shop for everything related to your Automotive learning Journey </h3>
+    <button>Get started</button>
+    <button onclick="window.location.href='/adminView';" type="button" class="btn btn-outline-info">Admin View</button>
+    <button onclick="window.location.href='/instructorView';" type="button" class="btn btn-outline-info">Student View</button>
+    <button onclick="window.location.href='/studentView';" type="button" class="btn btn-outline-info">Instructor View</button>
+    <button onclick="window.location.href='/DOTView';"type="button" class="btn btn-outline-info">DOT View</button>
+  </div>
+</div>
+
+
+
+
+
+
+
+</body>
+</html>

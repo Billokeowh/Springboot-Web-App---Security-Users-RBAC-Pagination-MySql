@@ -20,13 +20,40 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
-	
-	// display list of employees
+
+	//INDEX MAPPING
 	@GetMapping("/")
-	public String viewHomePage(Model model) {
-		return findPaginated(1, "studentid", "asc", model);
+	public String index() {
+		return "index";
 	}
-	
+
+
+	// ADMIN VIEW MAPPING
+	@GetMapping("/adminView")
+	public String adminView(Model model) {
+		return findPaginatedAdmin(1, "studentid", "asc", model);
+	}
+
+
+
+	//INSTRUCTOR VIEW MAPPING
+	@GetMapping("/instructorView")
+	public String instructorView(Model model){
+		return findPaginatedInstructor(1, "instructorid", "asc", model);
+	}
+
+	@GetMapping("/studentView")
+	public String studentView(Model model){
+		return findPaginatedStudent(1, "studentname", "asc", model);
+	}
+
+	@GetMapping("/DOTView")
+	public String DOTView(Model model){
+		return findPaginatedDOT(1, "studentname", "asc", model);
+	}
+
+
+	//NEW LESSON VIEW MAPPING
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
 		// create model attribute to bind form data
@@ -65,7 +92,7 @@ public class EmployeeController {
 	
 	
 	@GetMapping("/page/{pageNo}")
-	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+	public String findPaginatedAdmin(@PathVariable (value = "pageNo") int pageNo,
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
 			Model model) {
@@ -83,6 +110,82 @@ public class EmployeeController {
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 		
 		model.addAttribute("listEmployees", listEmployees);
-		return "index";
+		return "adminView";
 	}
+
+
+
+
+	@GetMapping("instructorView/page/{pageNo}")
+	public String findPaginatedInstructor(@PathVariable (value = "pageNo") int pageNo,
+									   @RequestParam("sortField") String sortField,
+									   @RequestParam("sortDir") String sortDir,
+									   Model model) {
+		int pageSize = 50;
+
+		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> listEmployees = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listEmployees", listEmployees);
+		return "instructorView";
+	}
+
+	@GetMapping("studentView/page/{pageNo}")
+	public String findPaginatedStudent(@PathVariable (value = "pageNo") int pageNo,
+								@RequestParam("sortField") String sortField,
+								@RequestParam("sortDir") String sortDir,
+								Model model) {
+		int pageSize = 50;
+
+		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> listEmployees = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listEmployees", listEmployees);
+		return "studentView";
+	}
+
+	@GetMapping("DOTView/page/{pageNo}")
+	public String findPaginatedDOT(@PathVariable (value = "pageNo") int pageNo,
+									   @RequestParam("sortField") String sortField,
+									   @RequestParam("sortDir") String sortDir,
+									   Model model) {
+		int pageSize = 50;
+
+		Page<Employee> page = employeeService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Employee> listEmployees = page.getContent();
+
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+
+		model.addAttribute("listEmployees", listEmployees);
+		return "DOTView";
+	}
+
+	@GetMapping("/contactUs")
+	public String findcontactUsPage(){
+		return "contactUs";
+	}
+
+
 }

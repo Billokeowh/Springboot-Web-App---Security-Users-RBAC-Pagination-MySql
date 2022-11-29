@@ -1,196 +1,490 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="en" class="h-100">
 <head>
-<meta charset="ISO-8859-1">
-<title>Student Lesson Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.104.2">
+    <title>Sticky Footer Navbar Template · Bootstrap v5.2</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-	crossorigin="anonymous">
-	
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/sticky-footer-navbar/">
+
+
+
+
+
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /*body{*/
+        /*    background: linear-gradient(to top right, #ffffff 1%, #ccffff 100%);*/
+        /*}*/
+
+        .hero-image {
+            background-image: url("https://www.moneyshake.com/shaking-news/wp-content/uploads/2019/11/Driving-Test-904x600.jpg"); /* The image used */
+            background-color: #cccccc; /* Used if the image is unavailable */
+            height: 500px; /* You must set a specified height */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-size: cover; /* Resize the background image to cover the entire container */
+        }
+
+        .bd-placeholder-img {
+
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .b-example-divider {
+            height: 3rem;
+            background-color: rgba(0, 0, 0, .1);
+            border: solid rgba(0, 0, 0, .15);
+            border-width: 1px 0;
+            box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+
+        .b-example-vr {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 100vh;
+        }
+
+        .bi {
+            vertical-align: -.125em;
+            fill: currentColor;
+        }
+
+        .nav-scroller {
+            position: relative;
+            z-index: 2;
+            height: 2.75rem;
+            overflow-y: hidden;
+        }
+
+        .nav-scroller .nav {
+            display: flex;
+            flex-wrap: nowrap;
+            padding-bottom: 1rem;
+            margin-top: -1px;
+            overflow-x: auto;
+            text-align: center;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @keyframes tonext {
+            75% {
+                left: 0;
+            }
+            95% {
+                left: 100%;
+            }
+            98% {
+                left: 100%;
+            }
+            99% {
+                left: 0;
+            }
+        }
+
+        @keyframes tostart {
+            75% {
+                left: 0;
+            }
+            95% {
+                left: -300%;
+            }
+            98% {
+                left: -300%;
+            }
+            99% {
+                left: 0;
+            }
+        }
+
+        @keyframes snap {
+            96% {
+                scroll-snap-align: center;
+            }
+            97% {
+                scroll-snap-align: none;
+            }
+            99% {
+                scroll-snap-align: none;
+            }
+            100% {
+                scroll-snap-align: center;
+            }
+        }
+
+        body {
+            max-width: 37.5rem;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+            font-family: 'Lato', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            scrollbar-color: transparent transparent; /* thumb and track color */
+            scrollbar-width: 0px;
+        }
+
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
 </head>
-<body>
+
+<body class="d-flex flex-column h-100">
+
+<div class="hero-image">
+    <div class="hero-text">
+        <h1 style="font-size:50px">I am Jane Doe</h1>
+        <h3>And I'm a Photographer</h3>
+        <button>Hire me</button>
+    </div>
+</div>
 
 
-	<div class="table">
-	<h1>Previous lessons List</h1>
-	
-	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add new lesson </a>
-		<input type="text" id="myInput" onkeyup="NameSearchFunction()" placeholder="Search for entry by Name" title="Type in a name">
 
-	
-		<table id = "lessonTable" border="2" class = "table">
-			<thead>
-				<tr>
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
-							Lesson ID</a>
-					</th>
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentid&sortDir=' + ${reverseSortDir}}">
-							Student ID</a>
-					</th>
-
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentname&sortDir=' + ${reverseSortDir}}">
-							Student Name</a>
-					</th>
-
-					<th>
-					<a th:href="@{'/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">
-							Date</a>
-					</th>
-
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">
-							Location</a>
-					</th>
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=positivepoints&sortDir=' + ${reverseSortDir}}">
-							Positive Points</a>
-					</th>
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=negativepoints&sortDir=' + ${reverseSortDir}}">
-							Negative Points</a>
-					</th>
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=studentnotes&sortDir=' + ${reverseSortDir}}">
-							Student Notes</a>
-					</th>
-
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorid&sortDir=' + ${reverseSortDir}}">
-							Instructor ID</a>
-					</th>
-
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorname&sortDir=' + ${reverseSortDir}}">
-							Instructor Name</a>
-					</th>
-
-
-					<th>
-						<a th:href="@{'/page/' + ${currentPage} + '?sortField=instructornotes&sortDir=' + ${reverseSortDir}}">
-							Instructor Notes</a>
-					</th>
-
-
-					<th> Actions </th>
-				</tr>
-			</thead>
-			<tbody>
-
-				<tr th:each="employee : ${listEmployees}">
-					<td th:text="${employee.id}"></td>
-					<td th:text="${employee.studentid}"></td>
-					<td th:text="${employee.studentname}"></td>
-					<td th:text="${employee.date}"></td>
-					<td th:text="${employee.location}"></td>
-					<td th:text="${employee.positivepoints}"></td>
-					<td th:text="${employee.negativepoints}"></td>
-					<td th:text="${employee.studentnotes}"></td>
-					<td th:text="${employee.instructorid}"></td>
-					<td th:text="${employee.instructorname}"></td>
-					<td th:text="${employee.instructornotes}"></td>
-					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update lesson</a>
-					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete lesson</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div th:if = "${totalPages > 1}">
-			<div class = "row col-sm-10">
-				<div class = "col-sm-1">
-					Total Rows: [[${totalItems}]]
-				</div>
-				<div class = "col-sm-10">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
-				</div>
-				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-					<span th:unless="${currentPage < totalPages}">Next</span>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-<script>
-	function NameSearchFunction() {
-		let input, filter, table, tr, td, i, txtValue;
-
-		//Initilising all variables
-		input = document.getElementById("myInput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("lessonTable");
-		tr = table.getElementsByTagName("tr");
-		console.log(filter)
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">My Learner Driver App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/contactUs">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
 
 
 
 
 
-		for (i = 0; i < tr.length; i++) {
-			td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
-			if (td) {
-				txtValue = td.textContent || td.innerText;
-				console.log(txtValue);
-				if (txtValue.toUpperCase().indexOf(filter) > -1) {
-					tr[i].style.display = "";
-				} else {
-					tr[i].style.display = "none";
-				}
-			}
-		}
-	}
 
 
-	// function LessonIDSearchFunction() {
-	// 	let input, filter, table, tr, td, i, txtValue;
-	//
-	// 	//Initilising all variables
-	// 	input = document.getElementById("myInput");
-	// 	filter = input.value.toUpperCase();
-	// 	table = document.getElementById("lessonTable");
-	// 	tr = table.getElementsByTagName("tr");
-	// 	console.log("Searching for ")
-	//
-	//
-	//
-	//
-	// 	for (i = 0; i < tr.length; i++) {
-	// 		td = tr[i].getElementsByTagName("td")[0]; //Refers to the column that is to be searched - in this case column 3
-	// 		if (td) {
-	// 			txtValue = td.textContent || td.innerText;
-	// 			console.log(txtValue);
-	// 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-	// 				tr[i].style.display = "";
-	// 			} else {
-	// 				tr[i].style.display = "none";
-	// 			}
-	// 		}
-	// 	}
-	// }
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+    <div class="container">
+        <h1> </h1>
+
+        <h1 class="mt-5">Learner Driver Web Application</h1>
+        <p class="lead">Welcome to the Web Application that makes learning to drive easier for everyone! </code></p>
+
+        <img src="https://www.moneyshake.com/shaking-news/wp-content/uploads/2019/11/Driving-Test-904x600.jpg" class="img-fluid" alt="...">
+
+        <button onclick="window.location.href='/adminView';" type="button" class="btn btn-outline-info">Admin View</button>
+        <button onclick="window.location.href='/instructorView';" type="button" class="btn btn-outline-info">Student View</button>
+        <button onclick="window.location.href='/studentView';" type="button" class="btn btn-outline-info">Instructor View</button>
+        <button onclick="window.location.href='/DOTView';"type="button" class="btn btn-outline-info">DOT View</button>
 
 
-</script>
 
+
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted">Psssttt..... Daily deal. 12 Months membership for the price of 6 month. Details <a href="../examples/sticky-footer/">here</a> :)</span>
+    </div>
+</footer>
+
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>
+
 </html>
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">-->
+
+
+<!--&lt;!&ndash;<nav class="navbar navbar-expand-lg bg-light">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="container-fluid">&ndash;&gt;-->
+<!--&lt;!&ndash;        <a class="navbar-brand" href="#">Navbar</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">&ndash;&gt;-->
+<!--&lt;!&ndash;            <span class="navbar-toggler-icon"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="navbar-nav">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="nav-link active" aria-current="page" href="#">Home</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="nav-link" href="#">Features</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="nav-link" href="#">Pricing</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="nav-link disabled">Disabled</a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;</nav>&ndash;&gt;-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    &lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="center">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>DrivingApplication</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p><button  onclick="window.location.href='/adminView';">Admin View</p>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p><button  onclick="window.location.href='/instructorView';">Instructor View</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p><button onclick="window.location.href='/studentView';">Student View</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p><button onclick="window.location.href='/DOTView';">DOT View</p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--    <!doctype html>-->
+<!--    <html lang="en" class="h-100">-->
+<!--    <head>-->
+<!--        <meta charset="utf-8">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--        <meta name="description" content="">-->
+<!--        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">-->
+<!--        <meta name="generator" content="Hugo 0.104.2">-->
+<!--        <title>Cover Template · Bootstrap v5.2</title>-->
+
+<!--        <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cover/">-->
+
+
+
+
+
+<!--        <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+<!--        <style>-->
+<!--            .bd-placeholder-img {-->
+<!--                font-size: 1.125rem;-->
+<!--                text-anchor: middle;-->
+<!--                -webkit-user-select: none;-->
+<!--                -moz-user-select: none;-->
+<!--                user-select: none;-->
+<!--            }-->
+
+<!--            @media (min-width: 768px) {-->
+<!--                .bd-placeholder-img-lg {-->
+<!--                    font-size: 3.5rem;-->
+<!--                }-->
+<!--            }-->
+
+<!--            .b-example-divider {-->
+<!--                height: 3rem;-->
+<!--                background-color: rgba(240, 240, 240, .1);-->
+<!--                border: solid rgba(0, 0, 0, .15);-->
+<!--                border-width: 1px 0;-->
+<!--                box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);-->
+<!--            }-->
+
+<!--            .b-example-vr {-->
+<!--                flex-shrink: 0;-->
+<!--                width: 1.5rem;-->
+<!--                height: 100vh;-->
+<!--            }-->
+
+<!--            .bi {-->
+<!--                vertical-align: -.125em;-->
+<!--                fill: currentColor;-->
+<!--            }-->
+
+<!--            .nav-scroller {-->
+<!--                position: relative;-->
+<!--                z-index: 2;-->
+<!--                height: 2.75rem;-->
+<!--                overflow-y: hidden;-->
+<!--            }-->
+
+<!--            .nav-scroller .nav {-->
+
+<!--                display: flex;-->
+<!--                flex-wrap: nowrap;-->
+<!--                padding-bottom: 1rem;-->
+<!--                margin-top: -1px;-->
+<!--                overflow-x: auto;-->
+<!--                text-align: center;-->
+<!--                white-space: nowrap;-->
+<!--                -webkit-overflow-scrolling: touch;-->
+<!--            }-->
+
+<!--            .carousel-inner{-->
+<!--                color: white;-->
+<!--                font-size: x-large;-->
+<!--                position: center;-->
+<!--                width:25%;-->
+<!--                margin: auto;-->
+<!--            }-->
+
+<!--            .carousel-inner img {-->
+
+<!--            }-->
+
+
+<!--        </style>-->
+
+
+<!--        &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--        <link href="cover.css" rel="stylesheet">-->
+<!--    </head>-->
+
+<!--    -->
+
+<!--    <body class="d-flex h-100 text-center text-bg-dark">-->
+
+<!--    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">-->
+<!--        <header class="mb-auto">-->
+<!--            <div>-->
+<!--                <h3 class="float-md-start mb-0">Cover</h3>-->
+<!--                <nav class="nav nav-masthead justify-content-center float-md-end">-->
+<!--                    <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="#">Home</a>-->
+<!--                    <a class="nav-link fw-bold py-1 px-0" href="#">Features</a>-->
+<!--                    <a class="nav-link fw-bold py-1 px-0" href="#">Contact</a>-->
+<!--                </nav>-->
+<!--            </div>-->
+<!--        </header>-->
+
+<!--        <main class="px-3">-->
+<!--            <h1>Welcome to the Driving Lessons Web Application.</h1>-->
+<!--            <p class="lead">The purpose of this Web Application is to make the learning process simpler for Students, Instructors and Department of Transport Officials.</p>-->
+
+
+
+<!--            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">-->
+<!--                <div class="carousel-inner">-->
+<!--                    <div class="carousel-item active">-->
+<!--                        <img src="https://www.moneyshake.com/shaking-news/wp-content/uploads/2019/11/Driving-Test-904x600.jpg" class="d-block w-100" alt="...">-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="https://www.moneyshake.com/shaking-news/wp-content/uploads/2021/02/shutterstock_1119993191.jpg" class="d-block w-100" alt="...">-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="https://www.moneyshake.com/shaking-news/wp-content/uploads/2021/02/shutterstock_227580436.jpG" class="d-block w-100" alt="...">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+<!--            <div id="carouselExampleIndicators" class="carousel slide" data-mdb-ride="carousel">-->
+<!--                <div class="carousel-indicators">-->
+<!--                    <button-->
+<!--                            type="button"-->
+<!--                            data-mdb-target="#carouselExampleIndicators"-->
+<!--                            data-mdb-slide-to="0"-->
+<!--                            class="active"-->
+<!--                            aria-current="true"-->
+<!--                            aria-label="Slide 1"-->
+<!--                    ></button>-->
+<!--                    <button-->
+<!--                            type="button"-->
+<!--                            data-mdb-target="#carouselExampleIndicators"-->
+<!--                            data-mdb-slide-to="1"-->
+<!--                            aria-label="Slide 2"-->
+<!--                    ></button>-->
+<!--                    <button-->
+<!--                            type="button"-->
+<!--                            data-mdb-target="#carouselExampleIndicators"-->
+<!--                            data-mdb-slide-to="2"-->
+<!--                            aria-label="Slide 3"-->
+<!--                    ></button>-->
+<!--                </div>-->
+<!--                <div class="carousel-inner">-->
+<!--                    <div class="carousel-item active">-->
+<!--                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/041.webp" class="d-block w-100" alt="Wild Landscape"/>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp" class="d-block w-100" alt="Camera"/>-->
+<!--                    </div>-->
+<!--                    <div class="carousel-item">-->
+<!--                        <img src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp" class="d-block w-100" alt="Exotic Fruits"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">-->
+<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+<!--                    <span class="visually-hidden">Previous</span>-->
+<!--                </button>-->
+<!--                <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">-->
+<!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+<!--                    <span class="visually-hidden">Next</span>-->
+<!--                </button>-->
+<!--            </div>-->
+
+
+
+
+
+
+
+
+
+<!--        <h2>I am a.....</h2>-->
+<!--        <p class="lead">-->
+<!--            <a href="/studentView" class="btn btn-lg btn-secondary fw-bold border-white bg-Blue">Student</a>-->
+<!--            <a href="/instructorView" class="btn btn-lg btn-secondary fw-bold border-white bg-Green">Instructor</a>-->
+<!--            <a href="/DOTView" class="btn btn-lg btn-secondary fw-bold border-white bg-Red">DOT Official</a>-->
+<!--&lt;!&ndash;            <button  onclick="window.location.href='/adminView';">Admin View</p>&ndash;&gt;-->
+<!--        </p>-->
+<!--    </main>-->
+
+<!--    <footer class="mt-auto text-white-50">-->
+<!--        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>-->
+<!--    </footer>-->
+<!--</div>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!--</html>-->
