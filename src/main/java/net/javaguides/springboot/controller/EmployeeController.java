@@ -6,14 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import net.javaguides.springboot.model.Employee;
-import net.javaguides.springboot.service.EmployeeService;
+import net.javaguides.springboot.config.EmployeeService;
 
 @Controller
 public class EmployeeController {
@@ -33,7 +29,6 @@ public class EmployeeController {
 	public String adminView(Model model) {
 		return findPaginatedAdmin(1, "studentid", "asc", model);
 	}
-
 
 
 	//INSTRUCTOR VIEW MAPPING
@@ -182,10 +177,36 @@ public class EmployeeController {
 		return "DOTView";
 	}
 
-	@GetMapping("/contactUs")
+	@GetMapping("/contactUs.html")
 	public String findcontactUsPage(){
 		return "contactUs";
 	}
+
+
+
+	@GetMapping("/about.html")
+	public String findaboutPage(){
+		return "about";
+	}
+
+	@GetMapping("/news.html")
+	public String findnewsPage(){
+		return "news";
+	}
+
+
+	@Controller
+	class LoginController {
+		@GetMapping("/login")
+		String login() {
+			return "login";
+		}
+	}
+
+
+
+
+
 
 
 }
