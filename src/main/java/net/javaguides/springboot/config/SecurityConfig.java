@@ -20,7 +20,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/home", "/news", "ContactUs", "login", "logout").permitAll()
+                        .antMatchers("/", "/news.html", "/ContactUs", "/login", "/logout").permitAll()
                         .antMatchers( "/adminView").hasRole("ADMIN")
                         .antMatchers( "/studentView").hasRole("STUDENT")
                         .antMatchers( "/instructorView").hasRole("INSTRUCTOR")
@@ -70,6 +70,8 @@ public class SecurityConfig {
                         .roles("INSTRUCTOR")
                         .build();
 
+
+
         UserDetails DOT =
                 User.withDefaultPasswordEncoder()
                         .username("DOT")
@@ -78,7 +80,36 @@ public class SecurityConfig {
                         .build();
 
 
-        return new InMemoryUserDetailsManager(user, admin, student, instructor, DOT);
+        UserDetails Instructor_Paulina =
+                User.withDefaultPasswordEncoder()
+                        .username("Instructor_Paulina")
+                        .password("password")
+                        .roles("INSTRUCTOR")
+                        .build();
+
+        UserDetails Instructor_Jack =
+                User.withDefaultPasswordEncoder()
+                        .username("Instructor_Jack")
+                        .password("password")
+                        .roles("INSTRUCTOR")
+                        .build();
+
+        UserDetails Student_Cristina =
+                User.withDefaultPasswordEncoder()
+                        .username("Student_Cristina")
+                        .password("password")
+                        .roles("STUDENT")
+                        .build();
+
+        UserDetails Student_Bobby =
+                User.withDefaultPasswordEncoder()
+                        .username("Student_Bobby")
+                        .password("password")
+                        .roles("STUDENT")
+                        .build();
+
+
+        return new InMemoryUserDetailsManager(user, admin, student, instructor, DOT, Instructor_Paulina, Instructor_Jack, Student_Bobby, Student_Cristina);
     }
 }
 

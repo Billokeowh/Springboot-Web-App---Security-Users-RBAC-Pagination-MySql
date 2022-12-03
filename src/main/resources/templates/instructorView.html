@@ -89,12 +89,9 @@
 
 
 
-
-
-
-
 </head>
-<body onload=JustDisplayOneinstructor()>
+
+<body onload=WhatInstructor()>
 
 <div class="NavBar">
   <ul>
@@ -102,6 +99,7 @@
     <li><a href="news.html">News</a></li>
     <li><a href="/contactUs.html">Contact</a></li>
     <li><a href="about.html">About</a></li>
+    [[${#httpServletRequest.remoteUser}]]
   </ul>
 </div>
 
@@ -116,56 +114,47 @@
     <tr>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorid&sortDir=' + ${reverseSortDir}}">
-          Instructor ID</a>
+        <a>Instructor ID</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorname&sortDir=' + ${reverseSortDir}}">
-          Instructor Name</a>
+        <a>Instructor Name</a>
       </th>
 
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructornotes&sortDir=' + ${reverseSortDir}}">
-          Instructor Notes</a>
+        <a>Instructor Notes</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+        <a>
           Lesson ID</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentid&sortDir=' + ${reverseSortDir}}">
-          Student ID</a>
+        <a>Student ID</a>
       </th>
 
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentname&sortDir=' + ${reverseSortDir}}">
-          Student Name</a>
+        <a>Student Name</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">
-          Date</a>
+        <a>Date</a>
       </th>
 
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">
-          Location</a>
+        <a>Location</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=positivepoints&sortDir=' + ${reverseSortDir}}">
-          Positive Points</a>
+        <a>Positive Points</a>
       </th>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=negativepoints&sortDir=' + ${reverseSortDir}}">
-          Negative Points</a>
+        <a>Negative Points</a>
       </th>
 
 <!--      <th>-->
@@ -200,34 +189,53 @@
 
 
       <td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update lesson</a>
-        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete lesson</a>
+<!--        <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete lesson</a>-->
       </td>
     </tr>
     </tbody>
   </table>
 
-  <div th:if = "${totalPages > 1}">
-    <div class = "row col-sm-10">
-      <div class = "col-sm-1">
-        Total Rows: [[${totalItems}]]
-      </div>
-      <div class = "col-sm-10">
-					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
-						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
-					</span>
-      </div>
-      <div class = "col-sm-1">
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
-        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-        <span th:unless="${currentPage < totalPages}">Next</span>
-      </div>
+<!--  <div th:if = "${totalPages > 1}">-->
+<!--    <div class = "row col-sm-10">-->
+<!--      <div class = "col-sm-1">-->
+<!--        Total Rows: [[${totalItems}]]-->
+<!--      </div>-->
+<!--      <div class = "col-sm-10">-->
+<!--					<span th:each="i: ${#numbers.sequence(1, totalPages)}">-->
+<!--						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>-->
+<!--						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;-->
+<!--					</span>-->
+<!--      </div>-->
+<!--      <div class = "col-sm-1">-->
+<!--        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>-->
+<!--        <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>-->
+<!--        <span th:unless="${currentPage < totalPages}">Next</span>-->
+<!--      </div>-->
 
-    </div>
-  </div>
-</div>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+</body>
 
 <script>
+
+  function WhatInstructor(){
+    constUName = "[[${#httpServletRequest.remoteUser}]]";
+    constCompare = "Instructor_Paulina";
+
+    if (constUName===constCompare){
+      console.log("Detected Paulina");
+      JustDisplayPaulina();
+    }else{
+      JustDisplayJack();
+    }
+
+  }
+
+
+
+
   function NameSearchFunction() {
     let input, filter, table, tr, td, i, txtValue;
 
@@ -256,8 +264,10 @@
   }
 
 
-  function JustDisplayOneinstructor() {
-    console.log("Running Search")
+
+
+
+  function JustDisplayPaulina() {
     alert("Displaying Instructor Paulinas details");
     input = "Paulina";
     filter = input.toUpperCase();
@@ -282,6 +292,33 @@
   }
 
 
+
+  function JustDisplayJack() {
+    alert("Displaying Instructor Jacks details");
+    input = "jack";
+    filter = input.toUpperCase();
+    table = document.getElementById("lessonTable");
+    tr = table.getElementsByTagName("tr");
+    console.log(filter)
+
+    console.log("At For loop")
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1]; //Refers to the column that is to be searched - in this case column 3
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        console.log(txtValue);
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+
+  }
+
+
+
 </script>
 
 
@@ -294,5 +331,5 @@
 
 
 
-</body>
+
 </html>

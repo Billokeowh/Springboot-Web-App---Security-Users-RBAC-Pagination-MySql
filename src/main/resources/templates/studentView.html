@@ -94,7 +94,7 @@
 
 
 </head>
-<body  onload = JustDisplayOneStudent()>
+<body  onload = WhatStudent()>
 
 <div class="NavBar">
     <ul>
@@ -122,58 +122,48 @@
       </th>
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentid&sortDir=' + ${reverseSortDir}}">
-                          Student ID</a>
+                      <a>Student ID</a>
                   </th>
 
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentname&sortDir=' + ${reverseSortDir}}">
-                          Student Name</a>
+                      <a>Student Name</a>
                   </th>
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=date&sortDir=' + ${reverseSortDir}}">
-                          Date</a>
-                  </th>
-
-
-                  <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=location&sortDir=' + ${reverseSortDir}}">
-                          Location</a>
-                  </th>
-
-                  <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=positivepoints&sortDir=' + ${reverseSortDir}}">
-                          Positive Points</a>
-                  </th>
-
-                  <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=negativepoints&sortDir=' + ${reverseSortDir}}">
-                          Negative Points</a>
-                  </th>
-
-                  <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=studentnotes&sortDir=' + ${reverseSortDir}}">
-                          Student Notes</a>
+                      <a>Date</a>
                   </th>
 
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorid&sortDir=' + ${reverseSortDir}}">
-                          Instructor ID</a>
+                      <a>Location</a>
+                  </th>
+
+                  <th>
+                      <a>Positive Points</a>
+                  </th>
+
+                  <th>
+                      <a>Negative Points</a>
+                  </th>
+
+                  <th>
+                      <a>Student Notes</a>
                   </th>
 
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructorname&sortDir=' + ${reverseSortDir}}">
-                          Instructor Name</a>
+                      <a>Instructor ID</a>
                   </th>
 
 
                   <th>
-                      <a th:href="@{'/page/' + ${currentPage} + '?sortField=instructornotes&sortDir=' + ${reverseSortDir}}">
-                          Instructor Notes</a>
+                      <a>Instructor Name</a>
+                  </th>
+
+
+                  <th>
+                      <a>Instructor Notes</a>
                   </th>
 
 
@@ -223,89 +213,104 @@
 </div>
 
 <script>
-  function NameSearchFunction() {
-    let input, filter, table, tr, td, i, txtValue;
 
-    //Initilising all variables
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("lessonTable");
-    tr = table.getElementsByTagName("tr");
-    console.log(filter)
+    function WhatStudent(){
+        constUName = "[[${#httpServletRequest.remoteUser}]]";
+        constCompare = "Student_Cristina";
 
-
-
-
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        console.log(txtValue);
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+        if (constUName===constCompare){
+            console.log("Detected Cristina");
+            JustDisplayStudent_Cristina();
+        }else{
+            JustDisplayStudent_Bobby();
         }
-      }
-    }
-  }
 
-
-  function JustDisplayOneStudent() {
-    console.log("Running Search")
-      alert("Displaying Student Bobbys details");
-    input = "bobby";
-    filter = input.toUpperCase();
-    table = document.getElementById("lessonTable");
-    tr = table.getElementsByTagName("tr");
-    console.log(filter)
-
-    console.log("At For loop")
-    for (i = 0; i < tr.length; i++) {
-      td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        console.log(txtValue);
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
-        }
-      }
     }
 
-  }
+
+
+
+    function NameSearchFunction() {
+        let input, filter, table, tr, td, i, txtValue;
+
+        //Initilising all variables
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("lessonTable");
+        tr = table.getElementsByTagName("tr");
+        console.log(filter)
+
+
+
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                console.log(txtValue);
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 
 
 
 
 
-  // function LessonIDSearchFunction() {
-  // 	let input, filter, table, tr, td, i, txtValue;
-  //
-  // 	//Initilising all variables
-  // 	input = document.getElementById("myInput");
-  // 	filter = input.value.toUpperCase();
-  // 	table = document.getElementById("lessonTable");
-  // 	tr = table.getElementsByTagName("tr");
-  // 	console.log("Searching for ")
-  //
-  //
-  //
-  //
-  // 	for (i = 0; i < tr.length; i++) {
-  // 		td = tr[i].getElementsByTagName("td")[0]; //Refers to the column that is to be searched - in this case column 3
-  // 		if (td) {
-  // 			txtValue = td.textContent || td.innerText;
-  // 			console.log(txtValue);
-  // 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-  // 				tr[i].style.display = "";
-  // 			} else {
-  // 				tr[i].style.display = "none";
-  // 			}
-  // 		}
-  // 	}
-  // }
+    function JustDisplayStudent_Cristina() {
+        alert("Displaying Student_Cristina's details");
+        input = "Cristina";
+        filter = input.toUpperCase();
+        table = document.getElementById("lessonTable");
+        tr = table.getElementsByTagName("tr");
+        console.log(filter)
+
+        console.log("At For loop")
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                console.log(txtValue);
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+    }
+
+
+
+    function JustDisplayStudent_Bobby() {
+        alert("Displaying Instructor Bobbys details");
+        input = "Bobby";
+        filter = input.toUpperCase();
+        table = document.getElementById("lessonTable");
+        tr = table.getElementsByTagName("tr");
+        console.log(filter)
+
+        console.log("At For loop")
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[2]; //Refers to the column that is to be searched - in this case column 3
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                console.log(txtValue);
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+
+    }
+
 
 
 </script>
