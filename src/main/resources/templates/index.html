@@ -79,6 +79,7 @@
     <li><a href="news.html">News</a></li>
     <li><a href="/contactUs.html">Contact</a></li>
     <li><a href="about.html">About</a></li>
+  </form> </li>
   </ul>
 </div>
 
@@ -96,6 +97,10 @@
     <button onclick="window.location.href='/instructorView';" type="button" class="btn btn-outline-light">Instructor View</button>
     <button onclick="window.location.href='/studentView';" type="button" class="btn btn-outline-light">Student View</button>
     <button onclick="window.location.href='/DOTView';"type="button" class="btn btn-outline-light">DOT View</button>
+    <br>
+    <br>
+    <h1> <a th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]</a> </h1>
+
   </div>
 </div>
 
