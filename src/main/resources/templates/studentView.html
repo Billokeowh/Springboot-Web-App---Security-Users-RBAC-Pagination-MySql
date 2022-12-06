@@ -117,8 +117,7 @@
     <tr>
 
       <th>
-        <a th:href="@{'/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
-          Lesson ID</a>
+        <a>Lesson ID</a>
       </th>
 
                   <th>
@@ -262,7 +261,6 @@
 
 
     function JustDisplayStudent_Cristina() {
-        alert("Displaying Student_Cristina's details");
         input = "Cristina";
         filter = input.toUpperCase();
         table = document.getElementById("lessonTable");
@@ -288,7 +286,6 @@
 
 
     function JustDisplayStudent_Bobby() {
-        alert("Displaying Instructor Bobbys details");
         input = "Bobby";
         filter = input.toUpperCase();
         table = document.getElementById("lessonTable");

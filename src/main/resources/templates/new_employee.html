@@ -16,37 +16,31 @@
 
 		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
 			method="POST">
-			Edit ID:<input type="text" th:field="*{id}"
-					   placeholder="Student ID" class="form-control mb-4 col-4">
+			Edit Lesson ID: <input type="text" th:field="*{id}" class="form-control mb-4 col-4">
 
-			Edit Name:<input type="text" th:field="*{studentname}"
-				placeholder="Student Name" class="form-control mb-4 col-4">
+			Edit Student Name:<input type="text" th:field="*{studentname}" class="form-control mb-4 col-4">
 
-			Edit Date:<input type="text" th:field="*{date}"
-				   placeholder="Date" class="form-control mb-4 col-4">
+			Edit Lesson Date: (YY-MM-DD) <input type="text" th:field="*{date}" class="form-control mb-4 col-4">
 
-			Edit Location:<input type="text" th:field="*{location}"
-				   placeholder="Location" class="form-control mb-4 col-4">
+			Edit Student ID: <input type="text" th:field="*{studentid}" class="form-control mb-4 col-4">
 
-			Edit Positive Notes:<input type="text" th:field="*{positivepoints}"
-				   placeholder="Positive Points" class="form-control mb-4 col-4">
+			Edit Student Notes: <input type="text" th:field="*{studentnotes}" class="form-control mb-4 col-4">
 
-			Edit Negatvie Notes:<input type="text" th:field="*{negativepoints}"
-				   placeholder="Negative Points" class="form-control mb-4 col-4">
+			Edit Instructor ID: <input type="text" th:field="*{instructorid}" class="form-control mb-4 col-4">
 
-			Edit Student Notes:<input type="text" th:field="*{studentnotes}"
-				   placeholder="Student Notes" class="form-control mb-4 col-4">
+			Edit Instructor Name: <input type="text" th:field="*{instructorname}" class="form-control mb-4 col-4">
 
-			Edit Instructor ID:<input type="text" th:field="*{instructorid}"
-				   placeholder="Instructor ID" class="form-control mb-4 col-4">
+			Edit Location: <input type="text" th:field="*{location}" class="form-control mb-4 col-4">
 
-			Edit Instructor Name:<input type="text" th:field="*{instructorname}"
-				   placeholder="Instructor Name" class="form-control mb-4 col-4">
+			Edit Positive points: <input type="text" th:field="*{positivepoints}" class="form-control mb-4 col-4">
 
-			Edit Instructor Notes:<input type="text" th:field="*{instructornotes}"
-				   placeholder="Instructor Notes" class="form-control mb-4 col-4">
-				
-				<button type="submit" class="btn btn-info col-2"> Save Employee</button>
+			Edit Negative Points: <input type="text" th:field="*{negativepoints}" class="form-control mb-4 col-4">
+
+
+			Edit Instructor Notes:	<input type="text" th:field="*{instructornotes}" class="form-control mb-4 col-4">
+
+
+			<button type="submit" class="btn btn-info col-2"> Save Student</button>
 		</form>
 		
 		<hr>

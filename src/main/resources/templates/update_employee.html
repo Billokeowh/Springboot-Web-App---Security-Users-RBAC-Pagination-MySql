@@ -9,9 +9,9 @@
 </head>
 <body>
 	<div class="container">
-		<h1>Employee Management System</h1>
+		<h1>Student Management System</h1>
 		<hr>
-		<h2>Update Employee</h2>
+		<h2>Update Student</h2>
 
 		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
 			method="POST">
@@ -19,11 +19,11 @@
 			<!-- Add hidden form field to handle update -->
 			<input type="hidden" th:field="*{id}" />
 
-			Edit ID: <input type="text" th:field="*{id}" class="form-control mb-4 col-4">
+			Edit Lesson ID: <input type="text" th:field="*{id}" class="form-control mb-4 col-4">
 
-			Edit Name:<input type="text" th:field="*{studentname}" class="form-control mb-4 col-4">
+			Edit Student Name:<input type="text" th:field="*{studentname}" class="form-control mb-4 col-4">
 
-			Edit Date: <input type="text" th:field="*{date}" class="form-control mb-4 col-4">
+			Edit Lesson Date: (YY-MM-DD) <input type="text" th:field="*{date}" class="form-control mb-4 col-4">
 
 			Edit Student ID: <input type="text" th:field="*{studentid}" class="form-control mb-4 col-4">
 
@@ -40,7 +40,7 @@
 			Edit Negative Points: <input type="text" th:field="*{negativepoints}" class="form-control mb-4 col-4">
 
 
-			Edit Instructor Notoes:	<input type="text" th:field="*{instructornotes}" class="form-control mb-4 col-4">
+			Edit Instructor Notes:	<input type="text" th:field="*{instructornotes}" class="form-control mb-4 col-4">
 				
 				<button type="submit" class="btn btn-info col-2"> Update Lesson</button>
 		</form>

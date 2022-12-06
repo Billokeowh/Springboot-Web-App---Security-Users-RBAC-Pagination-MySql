@@ -25,7 +25,11 @@ public class SecurityConfig {
                         .antMatchers( "/studentView").hasRole("STUDENT")
                         .antMatchers( "/instructorView").hasRole("INSTRUCTOR")
                         .antMatchers( "/DOTView").hasRole("DOT")
-
+                        .antMatchers( "/showNewEmployeeForm").hasAnyRole("STUDENT", "ADMIN", "INSTRUCTOR")
+                        .antMatchers( "/saveEmployee").hasAnyRole("STUDENT", "ADMIN", "INSTRUCTOR")
+                        .antMatchers( "/saveEmployee").hasRole("ADMIN")
+                        .antMatchers( "/deleteEmployee/**").hasAnyRole("STUDENT", "ADMIN")
+                        .antMatchers( "/showFormForUpdate/**").hasAnyRole("STUDENT", "ADMIN",  "INSTRUCTOR")
                         .anyRequest().authenticated()
                 )
 
