@@ -5,4 +5,4 @@
 
 This is a Springboot Web Application created for college. It is a learner driving web application which allows students ans instructors to recor lesson records using their own credentials. It was created with a frontend written with HTML, CSS and Javascript and a back end created with Springboot, Java, Maven and multiple dependencies such as Thymeleaf, Spring security, Spring data JPA etc.. 
 
-This project was created on the back of another project - https://github.com/RameshMF/springboot-thymeleaf-crud-pagination-sorting-webapp
+This project was created with elements from another repository - https://github.com/RameshMF/springboot-thymeleaf-crud-pagination-sorting-webapp
